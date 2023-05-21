@@ -3,9 +3,9 @@ all: install
 install:
 	mkdir -p ~/.config
 
-	[ -f ~/.gitconfig ] || ln -s $(PWD)/gitconfig ~/.gitconfig
-	[ -f ~/.zshrc ] || ln -s $(PWD)/zshrc ~/.zshrc
-	[ -f ~/.zshenv ] || ln -s $(PWD)/zshenv ~/.zshenv
+	[ -f ~/.gitconfig ] || ln -s $(PWD)/.gitconfig ~/.gitconfig
+	[ -f ~/.zshrc ] || ln -s $(PWD)/.zshrc ~/.zshrc
+	[ -f ~/.zshenv ] || ln -s $(PWD)/.zshenv ~/.zshenv
 	[ -d ~/.config/nvim/ ] || ln -s $(PWD)/nvim ~/.config/nvim
 	[ -d ~/.config/wezterm/ ] || ln -s $(PWD)/wezterm ~/.config/wezterm
 
