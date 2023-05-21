@@ -12,12 +12,6 @@ config.color_scheme = 'rose-pine'
 config.term = 'wezterm'
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
-config.window_padding = {
-  left = 1,
-  right = 1,
-  top = 1,
-  bottom = 1,
-}
 config.font_size = 16
 
 -- timeout_milliseconds defaults to 1000 and can be omitted
@@ -26,7 +20,8 @@ config.keys = {
   { 
     key = ".", 
     mods = "LEADER", 
-    action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }), },
+    action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }), 
+  },
   {
     key = "-",
     mods = "LEADER",
@@ -52,10 +47,6 @@ config.keys = {
     mods = "LEADER",
     action = wezterm.action.ActivatePaneDirection("Right"),
   },
-  { 
-    key = "z", 
-    mods = "LEADER", 
-    action = "TogglePaneZoomState" },
   {
     key = "a",
     mods = "LEADER|CTRL",
@@ -78,8 +69,5 @@ config.keys = {
   },
 }
 
-
-
 -- and finally, return the configuration to wezterm
 return config
-
