@@ -16,29 +16,29 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
-        'nvim-telescope/telescope.nvim', 
+        'nvim-telescope/telescope.nvim',
         tag = '0.1.1',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
-    { 
-        'rose-pine/neovim', 
+    {
+        'rose-pine/neovim',
         name = 'rose-pine',
         priority = 1000, -- make sure to load this before all the other start plugins
         config = function ()
             vim.cmd.colorscheme 'rose-pine'
-        end, 
+        end,
     },
-    { 
+    {
         'mbbill/undotree',
     },
-    { 
-        'nvim-treesitter/nvim-treesitter', 
+    {
+        'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
     },
-    { 
+    {
         'theprimeagen/harpoon',
     },
-    { 
+    {
         'tpope/vim-fugitive',
     },
     {
@@ -54,7 +54,6 @@ require("lazy").setup({
             end,
           },
           {'williamboman/mason-lspconfig.nvim'}, -- Optional
-      
           -- Autocompletion
           {'hrsh7th/nvim-cmp'},     -- Required
           {'hrsh7th/cmp-nvim-lsp'}, -- Required

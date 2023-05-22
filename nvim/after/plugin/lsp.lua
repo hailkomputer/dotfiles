@@ -25,6 +25,7 @@ lsp.setup_nvim_cmp({
   mapping = cmp_mappings
 })
 
+
 lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
@@ -36,5 +37,18 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, opts)
   vim.keymap.set('n', '<leader>do', vim.diagnostic.open_float)
 end)
+
+lsp.format_on_save({
+  format_opts = {
+    async = false,
+    timeout_ms = 10000,
+  },
+  servers = {
+    ['lua_ls'] = {'lua'},
+    ['rust_analyzer'] = {'rust'},
+    ['goimports'] = {'go'},
+    ['terraformls'] = {'terraform'}
+  }
+})
 
 lsp.setup()
