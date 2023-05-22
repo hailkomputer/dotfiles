@@ -5,6 +5,9 @@ zmodload zsh/zprof
 autoload -Uz compinit
 compinit
 
+alias ls='ls -la'
+alias home='cd /Users/yigit'
+
 # ===================
 #    PLUGINS
 # ===================
