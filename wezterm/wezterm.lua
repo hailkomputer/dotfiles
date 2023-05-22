@@ -51,16 +51,16 @@ config.keys = {
     mods = "LEADER|CTRL",
     action = wezterm.action.SendString("\x01"),
   },
-  -- { 
-  --   key = 'LeftArrow', 
-  --   mods = 'OPT', 
-  --   action = wezterm.action.SendString("\x1bb"),
-  -- },
-  -- { 
-  --   key = 'RightArrow', 
-  --   mods = 'OPT', 
-  --   action = wezterm.action.SendString("\x1bf"), 
-  -- },
+  { 
+    key = 'LeftArrow', 
+    mods = 'OPT', 
+    action = wezterm.action.SendString("\x1bb"),
+  },
+  { 
+    key = 'RightArrow', 
+    mods = 'OPT', 
+    action = wezterm.action.SendString("\x1bf"), 
+  },
   {
     key = 'w',
     mods = 'LEADER',

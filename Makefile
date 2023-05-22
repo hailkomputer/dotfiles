@@ -16,7 +16,7 @@ clean:
 	rm -f ~/.zshrc
 	rm -f ~/.zshenv
 	rm -f ~/.hushlogin
-	rm -f ~/.config/nvim/
-	rm -f ~/.config/wezterm/
+	rm -f ~/.config/nvim
+	rm -f ~/.config/wezterm
 
 .PHONY: all clean install
