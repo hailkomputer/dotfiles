@@ -9,7 +9,6 @@ if wezterm.config_builder then
 end
 
 config.color_scheme = 'rose-pine'
-config.term = 'wezterm'
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.font_size = 16
@@ -52,16 +51,16 @@ config.keys = {
     mods = "LEADER|CTRL",
     action = wezterm.action.SendString("\x01"),
   },
-  { 
-    key = 'LeftArrow', 
-    mods = 'OPT', 
-    action = wezterm.action.SendString("\x1bb"),
-  },
-  { 
-    key = 'RightArrow', 
-    mods = 'OPT', 
-    action = wezterm.action.SendString("\x1bf"), 
-  },
+  -- { 
+  --   key = 'LeftArrow', 
+  --   mods = 'OPT', 
+  --   action = wezterm.action.SendString("\x1bb"),
+  -- },
+  -- { 
+  --   key = 'RightArrow', 
+  --   mods = 'OPT', 
+  --   action = wezterm.action.SendString("\x1bf"), 
+  -- },
   {
     key = 'w',
     mods = 'LEADER',
@@ -69,5 +68,4 @@ config.keys = {
   },
 }
 
--- and finally, return the configuration to wezterm
 return config
