@@ -2,9 +2,6 @@
     name = Yigit Demirbas
     email = yigit.demirbas@gmail.com
 
-[includeIf "gitdir:~/Gitlab/"]
-    path = ~/Gitlab/.gitconfig
-
 [alias]
     st = status -sb
     ci = commit
@@ -26,3 +23,6 @@
 
 [init]
     defaultBranch = main
+
+[includeIf "gitdir:~/Gitlab/"]
+    path = ~/Gitlab/.gitconfig
