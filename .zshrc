@@ -8,6 +8,12 @@ compinit
 alias ls='ls -la'
 alias home='cd /Users/yigit'
 
+if [ -f ~/Gitlab/.zshalias ]; then
+    source ~/Gitlab/.zshalias
+else
+    print "failed to source gitlab aliases"
+fi
+
 # ===================
 #    PLUGINS
 # ===================
