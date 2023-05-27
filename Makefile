@@ -8,6 +8,7 @@ install:
 	[ -f ~/.zshenv ] || ln -s $(PWD)/.zshenv ~/.zshenv
 	[ -d ~/.config/nvim/ ] || ln -s $(PWD)/nvim ~/.config/nvim
 	[ -d ~/.config/wezterm/ ] || ln -s $(PWD)/wezterm ~/.config/wezterm
+	[ -f ~/.config/starship.toml ] || ln -s $(PWD)/starship.toml ~/.config/starship.toml 
 
 	touch ~/.hushlogin
 
@@ -16,6 +17,7 @@ clean:
 	rm -f ~/.zshrc
 	rm -f ~/.zshenv
 	rm -f ~/.hushlogin
+	rm -f ~/.config/starship.toml
 	rm -f ~/.config/nvim
 	rm -f ~/.config/wezterm
 
