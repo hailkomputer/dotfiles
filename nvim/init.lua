@@ -218,7 +218,7 @@ lsp.format_on_save({
 		timeout_ms = 10000,
 	},
 	servers = {
-		["null-ls"] = { "go", "rust", "lua", "terraform", "graphql" },
+		["null-ls"] = { "go", "rust", "lua", "terraform", "graphql", "terraform-vars" },
 	},
 })
 
