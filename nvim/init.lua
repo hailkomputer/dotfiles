@@ -231,7 +231,9 @@ local sources = {
 	null_ls.builtins.formatting.goimports_reviser,
 	null_ls.builtins.formatting.stylua,
 	null_ls.builtins.formatting.rustfmt,
-	null_ls.builtins.formatting.terraform_fmt,
+	null_ls.builtins.formatting.terraform_fmt.with({
+		extra_filetypes = { "tfvars" },
+	}),
 	null_ls.builtins.diagnostics.golangci_lint,
 	null_ls.builtins.diagnostics.staticcheck,
 	null_ls.builtins.diagnostics.tfsec,
