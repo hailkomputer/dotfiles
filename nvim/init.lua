@@ -218,7 +218,7 @@ lsp.format_on_save({
 		timeout_ms = 10000,
 	},
 	servers = {
-		["null-ls"] = { "go", "rust", "lua", "terraform", "graphql", "terraform-vars" },
+		["null-ls"] = { "go", "rust", "lua", "terraform", "graphql", "terraform-vars", "ruby" },
 	},
 })
 
@@ -238,6 +238,7 @@ local sources = {
 	null_ls.builtins.diagnostics.staticcheck,
 	null_ls.builtins.diagnostics.tfsec,
 	null_ls.builtins.formatting.prettier,
+	null_ls.builtins.formatting.rubocop,
 }
 
 null_ls.setup({ sources = sources })
