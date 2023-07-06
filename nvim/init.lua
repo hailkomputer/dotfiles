@@ -20,6 +20,7 @@ require("lazy").setup({
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
+		lazy = false,
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			vim.cmd.colorscheme("catppuccin-mocha")
@@ -129,7 +130,7 @@ vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 -- Treesitter config
 require("nvim-treesitter.configs").setup({
 	-- A list of parser names, or "all" (the five listed parsers should always be installed)
-	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "go", "hcl" },
+	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "go" },
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
 	sync_install = false,
