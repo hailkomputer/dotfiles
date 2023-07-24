@@ -23,7 +23,25 @@ require("lazy").setup({
 		lazy = false,
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			vim.cmd.colorscheme("catppuccin-mocha")
+			vim.cmd.colorscheme("catppuccin")
+		end,
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("lualine").setup({
+				options = { theme = "catppuccin" },
+				sections = {
+					lualine_c = {
+						{
+							"filename",
+							file_status = true, -- displays file status (readonly status, modified status)
+							path = 2, -- 0 = just filename, 1 = relative path, 2 = absolute path
+						},
+					},
+				},
+			})
 		end,
 	},
 	{
