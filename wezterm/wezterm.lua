@@ -12,6 +12,13 @@ config.color_scheme = "Catppuccin Mocha"
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.font_size = 16
+config.enable_scroll_bar = false
+config.window_padding = {
+	left = 0,
+	right = 0,
+	top = 0,
+	bottom = 0,
+}
 
 -- timeout_milliseconds defaults to 1000 and can be omitted
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
@@ -22,7 +29,7 @@ config.keys = {
 		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
-		key = "-",
+		key = ".",
 		mods = "LEADER",
 		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},

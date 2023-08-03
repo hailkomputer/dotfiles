@@ -1,3 +1,4 @@
+-- Bootstrap
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -11,12 +12,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Begin plugin initialization
 require("lazy").setup({
-	{
-		"nvim-telescope/telescope.nvim",
-		tag = "0.1.1",
-		dependencies = { "nvim-lua/plenary.nvim" },
-	},
+	-- colorscheme
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
@@ -26,6 +24,8 @@ require("lazy").setup({
 			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
+
+	-- statusline
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -44,8 +44,44 @@ require("lazy").setup({
 			})
 		end,
 	},
+
+	-- nvim tree file explorer
 	{
-		"mbbill/undotree",
+		"nvim-tree/nvim-tree.lua",
+		version = "*",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("nvim-tree").setup({
+				sort_by = "case_sensitive",
+				filters = {
+					dotfiles = true,
+				},
+				on_attach = function(bufnr)
+					local api = require("nvim-tree.api")
+
+					local function opts(desc)
+						return {
+							desc = "nvim-tree: " .. desc,
+							buffer = bufnr,
+							noremap = true,
+							silent = true,
+							nowait = true,
+						}
+					end
+
+					api.config.mappings.default_on_attach(bufnr)
+
+					vim.keymap.set("n", "s", api.node.open.vertical, opts("Open: Vertical Split"))
+					vim.keymap.set("n", "i", api.node.open.horizontal, opts("Open: Horizontal Split"))
+				end,
+			})
+		end,
+	},
+
+	{
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.2",
+		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -82,7 +118,11 @@ require("lazy").setup({
 	},
 })
 
---Settings
+-- Settings
+-- disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.tabstop = 4
@@ -131,6 +171,9 @@ vim.keymap.set("n", "<leader>do", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next)
 
+-- nvim tree remaps
+vim.keymap.set("n", "<leader>n", ":NvimTreeToggle<CR>", { noremap = true })
+
 -- Telescope config and remaps
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
@@ -138,9 +181,6 @@ vim.keymap.set("n", "<C-p>", builtin.git_files, {})
 vim.keymap.set("n", "<leader>ps", function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") })
 end)
-
--- Undotree toggle remap
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- Fugite toggle remap
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
