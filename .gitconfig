@@ -23,6 +23,3 @@
 
 [init]
     defaultBranch = main
-
-[includeIf "gitdir:~/Gitlab/"]
-    path = ~/Gitlab/.gitconfig
