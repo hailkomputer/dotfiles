@@ -1,6 +1,16 @@
 [user]
     name = Yigit Demirbas
     email = yigit.demirbas@gmail.com
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICQZFy8iCgobnG9y5PRDHzpqlTpVIYih/taZ6zLKcjho
+
+[gpg]
+    format = ssh
+
+[gpg "ssh"]
+    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[commit]
+    gpgsign = true
 
 [alias]
     st = status -sb
@@ -23,3 +33,13 @@
 
 [init]
     defaultBranch = main
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+
+[includeIf "gitdir:~/Gitea/"]
+    path = ~/Gitea/.gitconfig
