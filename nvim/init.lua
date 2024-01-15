@@ -330,6 +330,8 @@ local sources = {
 	null_ls.builtins.diagnostics.staticcheck,
 	null_ls.builtins.diagnostics.tfsec,
 	null_ls.builtins.formatting.prettier,
+	null_ls.builtins.formatting.buildifier,
+	null_ls.builtins.diagnostics.buildifier,
 }
 
 null_ls.setup({ sources = sources })
