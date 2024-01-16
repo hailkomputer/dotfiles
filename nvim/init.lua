@@ -269,7 +269,6 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
 	"gopls",
-	"rust_analyzer",
 	"terraformls",
 })
 
@@ -310,7 +309,7 @@ lsp.format_on_save({
 		timeout_ms = 10000,
 	},
 	servers = {
-		["null-ls"] = { "go", "rust", "lua", "terraform", "graphql", "terraform-vars" },
+		["null-ls"] = { "go", "lua", "terraform", "graphql", "terraform-vars" },
 	},
 })
 
@@ -323,7 +322,6 @@ local sources = {
 	null_ls.builtins.formatting.gofumpt,
 	null_ls.builtins.formatting.goimports_reviser,
 	null_ls.builtins.formatting.stylua,
-	null_ls.builtins.formatting.rustfmt,
 	null_ls.builtins.formatting.terraform_fmt.with({
 		extra_filetypes = { "tfvars" },
 	}),
