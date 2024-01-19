@@ -45,39 +45,6 @@ require("lazy").setup({
 		end,
 	},
 
-	-- nvim tree file explorer
-	{
-		"nvim-tree/nvim-tree.lua",
-		version = "*",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function()
-			require("nvim-tree").setup({
-				sort_by = "case_sensitive",
-				filters = {
-					dotfiles = true,
-				},
-				on_attach = function(bufnr)
-					local api = require("nvim-tree.api")
-
-					local function opts(desc)
-						return {
-							desc = "nvim-tree: " .. desc,
-							buffer = bufnr,
-							noremap = true,
-							silent = true,
-							nowait = true,
-						}
-					end
-
-					api.config.mappings.default_on_attach(bufnr)
-
-					vim.keymap.set("n", "s", api.node.open.vertical, opts("Open: Vertical Split"))
-					vim.keymap.set("n", "i", api.node.open.horizontal, opts("Open: Horizontal Split"))
-				end,
-			})
-		end,
-	},
-
 	-- telescope suite
 	-- native fzf
 	{
@@ -87,6 +54,12 @@ require("lazy").setup({
 
 	-- telescope picker should be default for core nvim
 	{ "nvim-telescope/telescope-ui-select.nvim" },
+
+	-- telescope-file-browser
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+	},
 
 	-- telescope itself
 	{
@@ -112,6 +85,9 @@ require("lazy").setup({
 							-- even more opts
 						}),
 					},
+					file_browser = {
+						hijack_netrw = true,
+					},
 				},
 			})
 
@@ -122,6 +98,10 @@ require("lazy").setup({
 			-- To get ui-select loaded and working with telescope, you need to call
 			-- load_extension, somewhere after setup function:
 			require("telescope").load_extension("ui-select")
+
+			-- To get telescope-file-browser loaded and working with telescope,
+			-- you need to call load_extension, somewhere after setup function:
+			require("telescope").load_extension("file_browser")
 		end,
 	},
 
@@ -202,8 +182,8 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
--- nvim-tree remaps
-vim.keymap.set("n", "<leader>n", ":NvimTreeToggle<CR>", { noremap = true })
+-- telescope-file-browser remaps
+vim.keymap.set("n", "<leader>fb", ":Telescope file_browser<CR>")
 
 -- telescope remaps
 local builtin = require("telescope.builtin")
