@@ -183,7 +183,7 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- telescope-file-browser remaps
-vim.keymap.set("n", "<leader>fb", ":Telescope file_browser<CR>")
+vim.keymap.set("n", "<leader>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
 
 -- telescope remaps
 local builtin = require("telescope.builtin")

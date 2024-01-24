@@ -6,7 +6,7 @@ autoload -Uz compinit
 compinit
 
 alias ls='ls -la'
-alias home='cd /Users/yigit'
+alias home="cd $HOME"
 if [ -f ~/Gitea/.zshalias ]; then
     source ~/Gitea/.zshalias
 else
@@ -24,6 +24,9 @@ if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$GOROOT/bin"
+if [ -d "$HOME/kcp/" ]; then
+    export PATH="$PATH:$HOME/kcp"
+fi
 export GPG_TTY=$(tty)
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 
