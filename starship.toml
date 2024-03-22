@@ -1,6 +1,3 @@
-# Sets user-defined palette
-palette = "catppuccin_mocha"
-
 [character]
 error_symbol = "[λ](bold #ff5555)"
 success_symbol = "[λ](bold #50fa7b)"
