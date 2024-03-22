@@ -15,8 +15,10 @@ fi
 # ===================
 #    PLUGINS
 # ===================
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ $(uname) == "Darwin" ]]; then
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 # ===================
 #    THIRD PARTY
 # ===================
@@ -27,8 +29,14 @@ export PATH="$PATH:$GOROOT/bin"
 if [ -d "$HOME/kcp/" ]; then
     export PATH="$PATH:$HOME/kcp"
 fi
-export GPG_TTY=$(tty)
-export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+
+if [[ $(uname) == "Darwin" ]]; then
+    if sysctl -n machdep.cpu.features | grep -qE '(VMX|SVM)'; then
+    else
+        export GPG_TTY=$(tty)
+        export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+    fi
+fi
 
 eval "$(starship init zsh)"
 
