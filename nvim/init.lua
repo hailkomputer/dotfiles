@@ -16,12 +16,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- colorscheme
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"Mofiqul/dracula.nvim",
+		name = "dracula",
 		lazy = false,
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			vim.cmd.colorscheme("catppuccin")
+			vim.cmd.colorscheme("dracula")
 		end,
 	},
 
