@@ -9,8 +9,6 @@ alias ls='ls -la'
 alias home="cd $HOME"
 if [ -f ~/Gitea/.zshalias ]; then
     source ~/Gitea/.zshalias
-else
-    print "failed to source gitea aliases"
 fi
 # ===================
 #    PLUGINS

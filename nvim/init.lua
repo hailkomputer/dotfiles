@@ -1,6 +1,6 @@
 -- Bootstrap
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
 		"clone",
@@ -16,12 +16,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- colorscheme
 	{
-		"Mofiqul/dracula.nvim",
-		name = "dracula",
+		"catppuccin/nvim",
+		name = "catppuccin",
 		lazy = false,
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			vim.cmd.colorscheme("dracula")
+			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
 
@@ -142,7 +142,7 @@ require("lazy").setup({
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.opt.nu = true
+vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -160,6 +160,7 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 50
+vim.opt.formatoptions:remove("o")
 
 -- remaps
 vim.g.mapleader = " "
