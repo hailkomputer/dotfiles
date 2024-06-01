@@ -8,7 +8,7 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.color_scheme = "Dracula"
+config.color_scheme = "Catppuccin Mocha"
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.font_size = 16
@@ -72,6 +72,13 @@ config.keys = {
 		key = "w",
 		mods = "LEADER",
 		action = wezterm.action.CloseCurrentPane({ confirm = true }),
+	},
+}
+config.mouse_bindings = {
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CTRL",
+		action = wezterm.action.OpenLinkAtMouseCursor,
 	},
 }
 

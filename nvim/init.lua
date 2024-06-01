@@ -1,5 +1,8 @@
 -- Bootstrap
+vim.g.mapleader = " "
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+---@diagnostic disable-next-line: undefined-field
 if not vim.uv.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
@@ -90,7 +93,6 @@ require("lazy").setup({
 					},
 				},
 			})
-
 			-- To get fzf loaded and working with telescope, you need to call
 			-- load_extension, somewhere after setup function:
 			require("telescope").load_extension("fzf")
@@ -102,6 +104,18 @@ require("lazy").setup({
 			-- To get telescope-file-browser loaded and working with telescope,
 			-- you need to call load_extension, somewhere after setup function:
 			require("telescope").load_extension("file_browser")
+
+			-- telescope-file-browser remaps
+			vim.keymap.set("n", "<leader>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
+
+			-- telescope remaps
+			local builtin = require("telescope.builtin")
+			vim.keymap.set("n", "<leader>ft", builtin.git_files, {})
+			vim.keymap.set("n", "<leader>fd", builtin.find_files, {})
+			vim.keymap.set("n", "<leader>gw", builtin.grep_string, {})
+			vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+			vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+			vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find, {})
 		end,
 	},
 
@@ -111,6 +125,7 @@ require("lazy").setup({
 	},
 	{
 		"theprimeagen/harpoon",
+		branch = "harpoon2",
 	},
 	{
 		"VonHeikemen/lsp-zero.nvim",
@@ -144,61 +159,58 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.inccommand = "split"
 vim.opt.expandtab = true
-vim.opt.smartindent = true
 vim.opt.wrap = false
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 50
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.clipboard = "unnamedplus"
+vim.opt.shada = { "'10", "<0", "s10", "h" }
 vim.opt.formatoptions:remove("o")
 
 -- remaps
-vim.g.mapleader = " "
+
+vim.keymap.set("n", "<c-j>", "<c-w><c-j>")
+vim.keymap.set("n", "<c-k>", "<c-w><c-k>")
+vim.keymap.set("n", "<c-l>", "<c-w><c-l>")
+vim.keymap.set("n", "<c-h>", "<c-w><c-h>")
+
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set("x", "<leader>p", [["_dP]])
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
--- telescope-file-browser remaps
-vim.keymap.set("n", "<leader>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
-
--- telescope remaps
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<C-p>", builtin.git_files, {})
-vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-vim.keymap.set("n", "<leader>td", builtin.diagnostics, {})
-vim.keymap.set("n", "<leader>gs", builtin.grep_string, {})
-vim.keymap.set("n", "<leader>gg", builtin.live_grep, {})
+vim.keymap.set("n", "<CR>", function()
+	if vim.v.hlsearch == 1 then
+		vim.cmd.nohl()
+		return ""
+	else
+		return vim.keycode("<CR>")
+	end
+end, { expr = true })
 
 -- diagnostics
 vim.keymap.set("n", "<leader>do", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<leader>ds", vim.diagnostic.setqflist)
+
+vim.keymap.set("n", "<M-,>", "<c-w>5<")
+vim.keymap.set("n", "<M-.>", "<c-w>5>")
+vim.keymap.set("n", "<M-t>", "<C-W>+")
+vim.keymap.set("n", "<M-s>", "<C-W>-")
+
+vim.keymap.set("n", "<leader>tt", function()
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+end)
 
 -- Treesitter config
 require("nvim-treesitter.configs").setup({
@@ -224,24 +236,20 @@ require("nvim-treesitter.configs").setup({
 })
 
 -- Harpoon configuration and remaps
-local mark = require("harpoon.mark")
-local ui = require("harpoon.ui")
+local harpoon = require("harpoon")
+harpoon.setup()
+vim.keymap.set("n", "<leader>ha", function()
+	harpoon:list():add()
+end)
+vim.keymap.set("n", "<leader>hl", function()
+	harpoon.ui:toggle_quick_menu(harpoon:list())
+end)
 
-vim.keymap.set("n", "<leader>a", mark.add_file)
-vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
-
-vim.keymap.set("n", "<C-h>", function()
-	ui.nav_file(1)
-end)
-vim.keymap.set("n", "<C-j>", function()
-	ui.nav_file(2)
-end)
-vim.keymap.set("n", "<C-k>", function()
-	ui.nav_file(3)
-end)
-vim.keymap.set("n", "<C-l>", function()
-	ui.nav_file(4)
-end)
+for _, idx in ipairs({ 1, 2, 3, 4, 5 }) do
+	vim.keymap.set("n", string.format("<leader>%d", idx), function()
+		harpoon:list():select(idx)
+	end)
+end
 
 -- LSP settings, the fun stuff
 local lsp = require("lsp-zero")
