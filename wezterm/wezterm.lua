@@ -20,60 +20,6 @@ config.window_padding = {
 	bottom = 0,
 }
 
--- timeout_milliseconds defaults to 1000 and can be omitted
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
-config.keys = {
-	{
-		key = "/",
-		mods = "LEADER",
-		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = ".",
-		mods = "LEADER",
-		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "h",
-		mods = "LEADER",
-		action = wezterm.action.ActivatePaneDirection("Left"),
-	},
-	{
-		key = "j",
-		mods = "LEADER",
-		action = wezterm.action.ActivatePaneDirection("Down"),
-	},
-	{
-		key = "k",
-		mods = "LEADER",
-		action = wezterm.action.ActivatePaneDirection("Up"),
-	},
-	{
-		key = "l",
-		mods = "LEADER",
-		action = wezterm.action.ActivatePaneDirection("Right"),
-	},
-	{
-		key = "a",
-		mods = "LEADER|CTRL",
-		action = wezterm.action.SendString("\x01"),
-	},
-	{
-		key = "LeftArrow",
-		mods = "OPT",
-		action = wezterm.action.SendString("\x1bb"),
-	},
-	{
-		key = "RightArrow",
-		mods = "OPT",
-		action = wezterm.action.SendString("\x1bf"),
-	},
-	{
-		key = "w",
-		mods = "LEADER",
-		action = wezterm.action.CloseCurrentPane({ confirm = true }),
-	},
-}
 config.mouse_bindings = {
 	{
 		event = { Up = { streak = 1, button = "Left" } },
