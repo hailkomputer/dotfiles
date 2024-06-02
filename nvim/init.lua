@@ -135,7 +135,6 @@ require("lazy").setup({
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-			"mfussenegger/nvim-lint",
 
 			{ "j-hui/fidget.nvim", opts = {} },
 
@@ -253,19 +252,6 @@ require("lazy").setup({
 					})
 				end,
 			})
-
-			-- Linter setup
-			require("lint").linters_by_ft = {
-				go = { "golangcilint" },
-			}
-
-			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-				callback = function()
-					-- try_lint without arguments runs the linters defined in `linters_by_ft`
-					-- for the current filetype
-					require("lint").try_lint()
-				end,
-			})
 		end,
 	},
 	{
@@ -315,6 +301,14 @@ require("lazy").setup({
 					end,
 				},
 			})
+		end,
+	},
+	{
+		"dense-analysis/ale",
+		config = function()
+			vim.g.ale_linters = {
+				go = { "golangci-lint" },
+			}
 		end,
 	},
 })
