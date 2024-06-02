@@ -13,6 +13,7 @@ if not vim.uv.fs_stat(lazypath) then
 		lazypath,
 	})
 end
+---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- Begin plugin initialization
@@ -128,27 +129,193 @@ require("lazy").setup({
 		branch = "harpoon2",
 	},
 	{
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v2.x",
+		"neovim/nvim-lspconfig",
 		dependencies = {
-			-- LSP Support
-			{ "neovim/nvim-lspconfig" }, -- Required
-			{
-				-- Optional
-				"williamboman/mason.nvim",
-				build = function()
-					pcall(vim.cmd, "MasonUpdate")
-				end,
-			},
-			{ "williamboman/mason-lspconfig.nvim" }, -- Optional
-			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" }, -- Required
-			{ "hrsh7th/cmp-nvim-lsp" }, -- Required
-			{ "L3MON4D3/LuaSnip" }, -- Required
+			"folke/neodev.nvim",
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			"mfussenegger/nvim-lint",
+
+			{ "j-hui/fidget.nvim", opts = {} },
+
+			-- Autoformatting
+			"stevearc/conform.nvim",
+
+			-- Schema information
+			"b0o/SchemaStore.nvim",
 		},
+		config = function()
+			require("neodev").setup({
+				-- library = {
+				--   plugins = { "nvim-dap-ui" },
+				--   types = true,
+				-- },
+			})
+
+			local capabilities = nil
+			if pcall(require, "cmp_nvim_lsp") then
+				capabilities = require("cmp_nvim_lsp").default_capabilities()
+			end
+
+			local lspconfig = require("lspconfig")
+
+			local servers = {
+				gopls = {
+					settings = {
+						gopls = {
+							hints = {
+								assignVariableTypes = true,
+								compositeLiteralFields = true,
+								compositeLiteralTypes = true,
+								constantValues = true,
+								functionTypeParameters = true,
+								parameterNames = true,
+								rangeVariableTypes = true,
+							},
+						},
+					},
+				},
+				lua_ls = true,
+			}
+
+			local servers_to_install = vim.tbl_filter(function(key)
+				local t = servers[key]
+				if type(t) == "table" then
+					return not t.manual_install
+				else
+					return t
+				end
+			end, vim.tbl_keys(servers))
+
+			require("mason").setup()
+			local ensure_installed = {
+				"stylua",
+				"lua_ls",
+				"delve",
+				"gopls",
+			}
+
+			vim.list_extend(ensure_installed, servers_to_install)
+			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+
+			for name, config in pairs(servers) do
+				if config == true then
+					config = {}
+				end
+				config = vim.tbl_deep_extend("force", {}, {
+					capabilities = capabilities,
+				}, config)
+
+				lspconfig[name].setup(config)
+			end
+
+			local disable_semantic_tokens = {
+				lua = true,
+			}
+
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(args)
+					local bufnr = args.buf
+					local client = assert(vim.lsp.get_client_by_id(args.data.client_id), "must have valid client")
+
+					vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
+					vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = 0 })
+					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = 0 })
+					vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
+
+					vim.keymap.set("n", "<space>cr", vim.lsp.buf.rename, { buffer = 0 })
+					vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, { buffer = 0 })
+
+					local filetype = vim.bo[bufnr].filetype
+					if disable_semantic_tokens[filetype] then
+						client.server_capabilities.semanticTokensProvider = nil
+					end
+				end,
+			})
+
+			-- Autoformatting Setup
+			require("conform").setup({
+				formatters_by_ft = {
+					lua = { "stylua" },
+					go = { "gofumpt", "goimports-reviser" },
+				},
+			})
+
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				callback = function(args)
+					require("conform").format({
+						bufnr = args.buf,
+						lsp_fallback = true,
+						quiet = true,
+					})
+				end,
+			})
+
+			-- Linter setup
+			require("lint").linters_by_ft = {
+				go = { "golangcilint" },
+			}
+
+			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+				callback = function()
+					-- try_lint without arguments runs the linters defined in `linters_by_ft`
+					-- for the current filetype
+					require("lint").try_lint()
+				end,
+			})
+		end,
 	},
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"hrsh7th/nvim-cmp",
+		lazy = false,
+		priority = 100,
+		dependencies = {
+			"onsails/lspkind.nvim",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-buffer",
+			{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
+			"saadparwaiz1/cmp_luasnip",
+		},
+		config = function()
+			vim.opt.completeopt = { "menu", "menuone", "noselect" }
+			vim.opt.shortmess:append("c")
+
+			local lspkind = require("lspkind")
+			lspkind.init({})
+
+			local cmp = require("cmp")
+
+			cmp.setup({
+				sources = {
+					{ name = "nvim_lsp" },
+					{ name = "cody" },
+					{ name = "path" },
+					{ name = "buffer" },
+				},
+				mapping = {
+					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+					["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+					["<C-y>"] = cmp.mapping(
+						cmp.mapping.confirm({
+							behavior = cmp.ConfirmBehavior.Insert,
+							select = true,
+						}),
+						{ "i", "c" }
+					),
+				},
+
+				-- Enable luasnip to handle snippet expansion for nvim-cmp
+				snippet = {
+					expand = function(args)
+						vim.snippet.expand(args.body)
+					end,
+				},
+			})
+		end,
 	},
 })
 
@@ -215,7 +382,7 @@ end)
 -- Treesitter config
 require("nvim-treesitter.configs").setup({
 	-- A list of parser names, or "all" (the five listed parsers should always be installed)
-	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "go" },
+	ensure_installed = { "lua", "go" },
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
 	sync_install = false,
@@ -250,76 +417,3 @@ for _, idx in ipairs({ 1, 2, 3, 4, 5 }) do
 		harpoon:list():select(idx)
 	end)
 end
-
--- LSP settings, the fun stuff
-local lsp = require("lsp-zero")
-
-lsp.preset("recommended")
-
-lsp.ensure_installed({
-	"gopls",
-	"terraformls",
-})
-
--- Fix Undefined global 'vim'
-lsp.nvim_workspace()
-
-local cmp = require("cmp")
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-	["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-	["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-	["<C-y>"] = cmp.mapping.confirm({ select = true }),
-	["<C-Space>"] = cmp.mapping.complete(),
-})
-
-lsp.setup_nvim_cmp({
-	mapping = cmp_mappings,
-})
-
-lsp.on_attach(function(_, bufnr)
-	local opts = { buffer = bufnr, remap = false }
-	vim.keymap.set("n", "gd", function()
-		vim.lsp.buf.definition()
-	end, opts)
-	vim.keymap.set("n", "K", function()
-		vim.lsp.buf.hover()
-	end, opts)
-	vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-	vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-end)
-
-lsp.format_on_save({
-	format_opts = {
-		async = false,
-		timeout_ms = 10000,
-	},
-	servers = {
-		["null-ls"] = { "go", "lua", "terraform", "graphql", "terraform-vars" },
-	},
-})
-
-lsp.setup()
-
--- Null-ls settings for formatters and linters
-local null_ls = require("null-ls")
-
-local sources = {
-	null_ls.builtins.formatting.gofumpt,
-	null_ls.builtins.formatting.goimports_reviser,
-	null_ls.builtins.formatting.stylua,
-	null_ls.builtins.formatting.terraform_fmt.with({
-		extra_filetypes = { "tfvars" },
-	}),
-	null_ls.builtins.diagnostics.golangci_lint,
-	null_ls.builtins.diagnostics.staticcheck,
-	null_ls.builtins.diagnostics.tfsec,
-	null_ls.builtins.formatting.prettier,
-	null_ls.builtins.formatting.buildifier,
-	null_ls.builtins.diagnostics.buildifier,
-}
-
-null_ls.setup({ sources = sources })
