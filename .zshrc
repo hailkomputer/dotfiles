@@ -16,6 +16,9 @@ fi
 if [[ $(uname) == "Darwin" ]]; then
     source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+else
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 # ===================
 #    THIRD PARTY
