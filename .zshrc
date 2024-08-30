@@ -5,6 +5,9 @@ zmodload zsh/zprof
 autoload -Uz compinit
 compinit
 
+SAVEHIST=5000
+HISTFILE=~/.zsh_history
+
 alias ls='ls -la'
 alias home="cd $HOME"
 if [ -f ~/Gitea/.zshalias ]; then
