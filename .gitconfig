@@ -31,5 +31,5 @@
 	required = true
 
 
-[includeIf "gitdir:~/Gitea/"]
-    path = ~/Gitea/.gitconfig
+[includeIf "gitdir:~/Gitlab/"]
+    path = ~/Gitlab/.gitconfig

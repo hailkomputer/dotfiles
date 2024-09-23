@@ -10,8 +10,8 @@ HISTFILE=~/.zsh_history
 
 alias ls='ls -la'
 alias home="cd $HOME"
-if [ -f ~/Gitea/.zshalias ]; then
-    source ~/Gitea/.zshalias
+if [ -f ~/Gitlab/.zshalias ]; then
+    source ~/Gitlab/.zshalias
 fi
 # ===================
 #    PLUGINS
