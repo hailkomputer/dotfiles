@@ -45,5 +45,7 @@ if [[ $(uname) == "Darwin" ]]; then
     fi
 fi
 
+bindkey -v
+
 eval "$(starship init zsh)"
 
