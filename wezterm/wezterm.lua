@@ -10,7 +10,7 @@ end
 
 config.color_scheme = "Catppuccin Mocha"
 config.enable_tab_bar = false
-config.font_size = 16
+config.font_size = 14
 config.window_decorations = "RESIZE"
 config.mouse_bindings = {
 	{
