@@ -5,8 +5,8 @@ zmodload zsh/zprof
 autoload -Uz compinit
 compinit
 
-set -g history-limit 10000
-set -g history-file ~/.zsh_history
+SAVEHIST=5000
+HISTFILE=~/.zsh_history
 
 setopt append_history
 setopt hist_expire_dups_first
