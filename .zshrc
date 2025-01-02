@@ -5,8 +5,14 @@ zmodload zsh/zprof
 autoload -Uz compinit
 compinit
 
-SAVEHIST=5000
-HISTFILE=~/.zsh_history
+set -g history-limit 10000
+set -g history-file ~/.zsh_history
+
+setopt append_history
+setopt hist_expire_dups_first
+setopt hist_find_no_dups
+setopt hist_ignore_all_dups
+setopt share_history
 
 alias ls='ls -la'
 alias home="cd $HOME"
