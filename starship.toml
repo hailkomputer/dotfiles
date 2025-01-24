@@ -1,28 +1,30 @@
 palette = "catppuccin_mocha"
-command_timeout = 2000
+command_timeout = 5000
 
 [character]
-error_symbol = "[λ](bold #ff5555)"
-success_symbol = "[λ](bold #50fa7b)"
+success_symbol = "[[󰄛](green) ❯](peach)"
+error_symbol = "[[󰄛](red) ❯](peach)"
+vimcmd_symbol = "[󰄛 ❮](subtext1)" 
 
 [cmd_duration]
-style = "bold #f1fa8c"
+style = "bold yellow"
 
 [directory]
-style = "bold #50fa7b"
+truncation_length = 4
+style = "bold lavender"
 
 [git_branch]
-style = "bold #ff79c6"
+style = "bold mauve"
 
 [git_status]
-style = "bold #ff5555"
+style = "bold maroon"
 
 [hostname]
-style = "bold #bd93f9"
+style = "bold flamingo"
 
 [username]
 format = "[$user]($style) on "
-style_user = "bold #8be9fd"
+style_user = "bold teal"
 
 [kubernetes]
 format = 'on [⛵ $context](green) '
