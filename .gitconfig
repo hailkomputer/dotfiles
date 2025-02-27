@@ -1,35 +1,55 @@
 [user]
-    name = Yigit Demirbas
-    email = yigit.demirbas@gmail.com
-
+        name = Yigit Demirbas
+        email = yigit.demirbas@gmail.com
 [alias]
-    st = status -sb
-    ci = commit
-    aa = add .
-    br = branch -vv
-    co = checkout
-    di = diff
-    lf = log -p
-    lo = log --graph --decorate --pretty=oneline --abbrev-commit
+        st = status -sb
+        ci = commit
+        aa = add .
+        br = branch -vv
+        co = checkout
+        di = diff
+        lf = log -p
+        lo = log --graph --decorate --pretty=oneline --abbrev-commit
 	ls = ls-files
-    ig = ls-files -o -i --exclude-standard
+        ig = ls-files -o -i --exclude-standard
 	un = reset HEAD --
-
 [core]
-    editor = nvim
-
-[pull]
-    ff = only
-
+        editor = nvim
+[column]
+        ui = auto
+[branch]
+        sort = -committerdate
+[tag]
+        sort = version:refname
 [init]
-    defaultBranch = main
-
+        defaultBranch = main
+[diff]
+        algorithm = histogram
+        colorMoved = plain
+        mnemonicPrefix = true
+        renames = true
+[push]
+        default = simple
+        autoSetupRemote = true
+        followTags = true
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+[pull]
+        ff = only
+[commit]
+        verbose = true
+[help]
+        autocorrect = prompt
+[rerere]
+        enabled = true
+        autoupdate = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 
-
 [includeIf "gitdir:~/Gitlab/"]
-    path = ~/Gitlab/.gitconfig
+        path = ~/Gitlab/.gitconfig
