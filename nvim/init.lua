@@ -154,8 +154,12 @@ require("lazy").setup({
 
 			-- diagnostics
 			vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-			vim.keymap.set("n", "<leader>[d", vim.diagnostic.goto_prev)
-			vim.keymap.set("n", "<leader>]d", vim.diagnostic.goto_next)
+			vim.keymap.set("n", "<leader>[d", function()
+				vim.diagnostic.jump({ count = -1, float = true })
+			end)
+			vim.keymap.set("n", "<leader>[d", function()
+				vim.diagnostic.jump({ count = 1, float = true })
+			end)
 
 			local capabilities = nil
 			if pcall(require, "cmp_nvim_lsp") then
@@ -314,19 +318,6 @@ require("lazy").setup({
 			vim.g.ale_linters = {
 				go = { "golangci-lint" },
 			}
-		end,
-	},
-	{
-		"hedengran/fga.nvim",
-		dependencies = {
-			"neovim/nvim-lspconfig", -- Optional, for LSP integration
-			"nvim-treesitter/nvim-treesitter", -- Optional, for enhanced syntax highlighting
-		},
-		config = function()
-			require("fga").setup({
-				install_treesitter_grammar = true,
-				lsp_server = "/path/to/vscode-ext/server/out/server.node.js",
-			})
 		end,
 	},
 })
