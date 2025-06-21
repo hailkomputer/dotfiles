@@ -8,10 +8,15 @@ compinit
 SAVEHIST=5000
 HISTFILE=~/.zsh_history
 
+# Save each command to the history file as soon as it is entered
 setopt append_history
+# When trimming history, lose oldest duplicate entries first
 setopt hist_expire_dups_first
+# Do not display duplicates when searching history
 setopt hist_find_no_dups
+# Remove all previous lines matching the current line from history
 setopt hist_ignore_all_dups
+# Share command history data between all sessions
 setopt share_history
 
 alias ls='ls -la'
