@@ -10,9 +10,9 @@
         di = diff
         lf = log -p
         lo = log --graph --decorate --pretty=oneline --abbrev-commit
-	ls = ls-files
+        ls = ls-files
         ig = ls-files -o -i --exclude-standard
-	un = reset HEAD --
+        un = reset HEAD --
 [core]
         editor = nvim
 [column]
@@ -46,7 +46,11 @@
         enabled = true
         autoupdate = true
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+        clean = git-lfs clean -- %f
+        smudge = git-lfs smudge -- %f
+        process = git-lfs filter-process
+        required = true
+[url "git@github.com:"]
+        insteadOf = https://github.com/
+[includeIf "gitdir:~/Github/elastx/"]
+        path = ~/Github/elastx/.gitconfig
