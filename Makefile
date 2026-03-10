@@ -3,12 +3,12 @@ all: install
 install:
 	mkdir -p ~/.config
 
-	[ -f ~/.gitconfig ] || ln -s $(PWD)/.gitconfig ~/.gitconfig
-	[ -f ~/.zshrc ] || ln -s $(PWD)/.zshrc ~/.zshrc
-	[ -d ~/.config/nvim/ ] || ln -s $(PWD)/nvim ~/.config/nvim
-	[ -d ~/.config/tmux/ ] || ln -s $(PWD)/tmux ~/.config/tmux
-	[ -d ~/.config/bat/ ] || ln -s $(PWD)/bat ~/.config/bat
-	[ -f ~/.config/starship.toml ] || ln -s $(PWD)/starship.toml ~/.config/starship.toml 
+	[ -f ~/.gitconfig ] || ln -s $(CURDIR)/.gitconfig ~/.gitconfig
+	[ -f ~/.zshrc ] || ln -s $(CURDIR)/.zshrc ~/.zshrc
+	[ -d ~/.config/nvim/ ] || ln -s $(CURDIR)/nvim ~/.config/nvim
+	[ -d ~/.config/tmux/ ] || ln -s $(CURDIR)/tmux ~/.config/tmux
+	[ -d ~/.config/bat/ ] || ln -s $(CURDIR)/bat ~/.config/bat
+	[ -f ~/.config/starship.toml ] || ln -s $(CURDIR)/starship.toml ~/.config/starship.toml 
 
 	touch ~/.hushlogin
 

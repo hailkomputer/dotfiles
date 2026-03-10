@@ -21,10 +21,8 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=50000
 SAVEHIST=50000
 
-setopt INC_APPEND_HISTORY
 setopt EXTENDED_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_SPACE
@@ -52,11 +50,13 @@ export FZF_DEFAULT_OPTS=" \
 # ===================
 #    THIRD PARTY
 # ===================
-if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+if command -v kubectl &> /dev/null; then source <(kubectl completion zsh); fi
 
+export GOPATH="$HOME/go"
+export GOROOT="$(go env GOROOT 2>/dev/null)"
 export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:$GOROOT/bin"
-
+[ -n "$GOROOT" ] && export PATH="$PATH:$GOROOT/bin"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 eval "$(starship init zsh)"
 
