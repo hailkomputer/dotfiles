@@ -1,6 +1,6 @@
 # dotfiles
 
-Personal macOS dotfiles managed with symlinks via Make.
+Personal dotfiles managed with symlinks via Make.
 
 ## What's Inside
 
@@ -16,8 +16,7 @@ Personal macOS dotfiles managed with symlinks via Make.
 
 ## Prerequisites
 
-- macOS with [Homebrew](https://brew.sh) installed
-- Apple Silicon (`/opt/homebrew`)
+- [Homebrew](https://brew.sh) installed
 
 ## Installation
 
