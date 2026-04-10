@@ -12,6 +12,7 @@ Personal dotfiles managed with symlinks via Make.
 | **tmux** | `tmux/` | C-Space prefix, vi keys, TPM plugins, Catppuccin status bar |
 | **starship** | `starship.toml` | Catppuccin Mocha prompt with kubernetes context |
 | **bat** | `bat/` | Catppuccin Mocha theme |
+| **claude code** | `claude/` | Catppuccin Mocha statusline, settings |
 | **ghostty** | (via Brewfile) | Terminal emulator |
 
 ## Prerequisites
@@ -51,6 +52,7 @@ make clean
 │       └── plugins/    # plugin overrides
 ├── starship.toml       # starship prompt config
 ├── tmux/               # tmux configuration + TPM plugins
+├── claude/             # claude code statusline + settings
 ├── Brewfile            # homebrew dependencies
 └── Makefile            # symlink installer
 ```
