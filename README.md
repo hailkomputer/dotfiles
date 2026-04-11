@@ -5,12 +5,12 @@ Personal dotfiles managed with symlinks via Make.
 ## What's Inside
 
 | Tool | Config | Description |
-|------|--------|-------------|
-| **zsh** | `.zshrc` | Vi mode, history, fzf, autosuggestions, syntax highlighting |
+| ------ | ------- | ------------- |
+| **zsh** | `.zshrc` | Vi mode, history, fzf, autosuggestions |
 | **git** | `.gitconfig` | Aliases, histogram diff, rerere, auto-setup remote |
 | **neovim** | `nvim/` | LazyVim distribution with Catppuccin Mocha theme |
-| **tmux** | `tmux/` | C-Space prefix, vi keys, TPM plugins, Catppuccin status bar |
-| **starship** | `starship.toml` | Catppuccin Mocha prompt with kubernetes context |
+| **tmux** | `tmux/` | C-Space prefix, vi keys, TPM plugins, Status bar |
+| **starship** | `starship.toml` | Prompt |
 | **bat** | `bat/` | Catppuccin Mocha theme |
 | **claude code** | `claude/` | Catppuccin Mocha statusline, settings |
 | **ghostty** | (via Brewfile) | Terminal emulator |
@@ -23,8 +23,8 @@ Personal dotfiles managed with symlinks via Make.
 
 ```sh
 # clone the repo
-git clone git@github.com:yigitdemirbas/dotfiles.git ~/Github/dotfiles
-cd ~/Github/dotfiles
+git clone git@github.com:yigitdemirbas/dotfiles.git
+cd dotfiles
 
 # install dependencies
 brew bundle
@@ -41,7 +41,7 @@ make clean
 
 ## Structure
 
-```
+```markdown
 .
 ├── .gitconfig          # git configuration and aliases
 ├── .zshrc              # shell configuration
