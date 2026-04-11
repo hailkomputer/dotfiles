@@ -1,8 +1,11 @@
 all: install
 
+K9S_DIR = $(HOME)/Library/Application Support/k9s
+
 install:
 	mkdir -p ~/.config
 	mkdir -p ~/.claude
+	mkdir -p "$(K9S_DIR)/skins"
 
 	[ -L ~/.gitconfig ] || [ -e ~/.gitconfig ] || ln -s $(CURDIR)/.gitconfig ~/.gitconfig
 	[ -L ~/.zshrc ] || [ -e ~/.zshrc ] || ln -s $(CURDIR)/.zshrc ~/.zshrc
@@ -12,6 +15,8 @@ install:
 	[ -L ~/.config/starship.toml ] || [ -e ~/.config/starship.toml ] || ln -s $(CURDIR)/starship.toml ~/.config/starship.toml
 	[ -L ~/.claude/statusline-command.sh ] || [ -e ~/.claude/statusline-command.sh ] || ln -s $(CURDIR)/claude/statusline-command.sh ~/.claude/statusline-command.sh
 	[ -L ~/.claude/settings.json ] || [ -e ~/.claude/settings.json ] || ln -s $(CURDIR)/claude/settings.json ~/.claude/settings.json
+	[ -L "$(K9S_DIR)/config.yaml" ] || [ -e "$(K9S_DIR)/config.yaml" ] || ln -s $(CURDIR)/k9s/config.yaml "$(K9S_DIR)/config.yaml"
+	[ -L "$(K9S_DIR)/skins/catppuccin-mocha.yaml" ] || [ -e "$(K9S_DIR)/skins/catppuccin-mocha.yaml" ] || ln -s $(CURDIR)/k9s/skins/catppuccin-mocha.yaml "$(K9S_DIR)/skins/catppuccin-mocha.yaml"
 
 	touch ~/.hushlogin
 
@@ -25,5 +30,7 @@ clean:
 	rm -f ~/.config/bat
 	rm -f ~/.claude/statusline-command.sh
 	rm -f ~/.claude/settings.json
+	rm -f "$(K9S_DIR)/config.yaml"
+	rm -f "$(K9S_DIR)/skins/catppuccin-mocha.yaml"
 
 .PHONY: all clean install

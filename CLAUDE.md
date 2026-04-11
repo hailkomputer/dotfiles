@@ -16,10 +16,12 @@ Each tool has its own directory or file at the repo root. The Makefile symlinks 
 | `starship.toml` | `~/.config/starship.toml` |
 | `claude/statusline-command.sh` | `~/.claude/statusline-command.sh` |
 | `claude/settings.json` | `~/.claude/settings.json` |
+| `k9s/config.yaml` | `~/Library/Application Support/k9s/config.yaml` |
+| `k9s/skins/catppuccin-mocha.yaml` | `~/Library/Application Support/k9s/skins/catppuccin-mocha.yaml` |
 
 ## Key conventions
 
-- **Theme**: Catppuccin Mocha everywhere (neovim, tmux, starship, bat, fzf, claude statusline)
+- **Theme**: Catppuccin Mocha everywhere (neovim, tmux, starship, bat, fzf, claude statusline, k9s)
 - **Shell**: zsh with vi mode, starship prompt, fzf, zsh-autosuggestions, zsh-syntax-highlighting
 - **Editor**: neovim via LazyVim
 - **Symlink guards**: Makefile uses `[ -L <path> ] || [ -e <path> ]` before linking — never overwrites existing files

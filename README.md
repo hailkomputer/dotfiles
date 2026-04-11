@@ -12,6 +12,7 @@ Personal dotfiles managed with symlinks via Make.
 | **tmux** | `tmux/` | C-Space prefix, vi keys, TPM plugins, Status bar |
 | **starship** | `starship.toml` | Prompt |
 | **bat** | `bat/` | Catppuccin Mocha theme |
+| **k9s** | `k9s/` | Catppuccin Mocha skin |
 | **claude code** | `claude/` | Catppuccin Mocha statusline, settings |
 | **ghostty** | (via Brewfile) | Terminal emulator |
 
@@ -52,6 +53,7 @@ make clean
 │       └── plugins/    # plugin overrides
 ├── starship.toml       # starship prompt config
 ├── tmux/               # tmux configuration + TPM plugins
+├── k9s/                # k9s config + Catppuccin Mocha skin
 ├── claude/             # claude code statusline + settings
 ├── Brewfile            # homebrew dependencies
 └── Makefile            # symlink installer
