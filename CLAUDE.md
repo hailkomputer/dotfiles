@@ -16,7 +16,6 @@ Each tool has its own directory or file at the repo root. The Makefile symlinks 
 | `starship.toml` | `~/.config/starship.toml` |
 | `claude/statusline-command.sh` | `~/.claude/statusline-command.sh` |
 | `claude/settings.json` | `~/.claude/settings.json` |
-| `aerospace.toml` | `~/.aerospace.toml` |
 
 ## Key conventions
 

@@ -12,7 +12,6 @@ install:
 	[ -L ~/.config/starship.toml ] || [ -e ~/.config/starship.toml ] || ln -s $(CURDIR)/starship.toml ~/.config/starship.toml
 	[ -L ~/.claude/statusline-command.sh ] || [ -e ~/.claude/statusline-command.sh ] || ln -s $(CURDIR)/claude/statusline-command.sh ~/.claude/statusline-command.sh
 	[ -L ~/.claude/settings.json ] || [ -e ~/.claude/settings.json ] || ln -s $(CURDIR)/claude/settings.json ~/.claude/settings.json
-	[ -L ~/.aerospace.toml ] || [ -e ~/.aerospace.toml ] || ln -s $(CURDIR)/aerospace.toml ~/.aerospace.toml
 
 	touch ~/.hushlogin
 
@@ -26,6 +25,5 @@ clean:
 	rm -f ~/.config/bat
 	rm -f ~/.claude/statusline-command.sh
 	rm -f ~/.claude/settings.json
-	rm -f ~/.aerospace.toml
 
 .PHONY: all clean install
