@@ -19,7 +19,6 @@ Each tool has its own directory or file at the repo root. The Makefile symlinks 
 | `claude/skills/` | `~/.claude/skills` |
 | `k9s/config.yaml` | `~/Library/Application Support/k9s/config.yaml` |
 | `k9s/skins/catppuccin-mocha.yaml` | `~/Library/Application Support/k9s/skins/catppuccin-mocha.yaml` |
-| `aerospace.toml` | `~/.aerospace.toml` |
 
 ## Key conventions
 
