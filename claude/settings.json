@@ -7,5 +7,7 @@
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true
   },
-  "effortLevel": "xhigh"
+  "effortLevel": "xhigh",
+  "skipWorkflowUsageWarning": true,
+  "tui": "fullscreen"
 }

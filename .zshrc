@@ -1,3 +1,6 @@
+# Homebrew: prepend bin + sbin ahead of /usr/bin (runs after macOS path_helper)
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 export EDITOR="nvim"
 
 autoload -Uz compinit
