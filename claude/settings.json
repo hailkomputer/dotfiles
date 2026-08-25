@@ -8,6 +8,6 @@
     "gopls-lsp@claude-plugins-official": true
   },
   "effortLevel": "xhigh",
-  "skipWorkflowUsageWarning": true,
-  "tui": "fullscreen"
+  "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true
 }
