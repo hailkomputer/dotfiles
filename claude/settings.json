@@ -9,5 +9,8 @@
   },
   "effortLevel": "xhigh",
   "tui": "fullscreen",
-  "skipWorkflowUsageWarning": true
+  "skipWorkflowUsageWarning": true,
+  "attribution": {
+    "commit": ""
+  }
 }
