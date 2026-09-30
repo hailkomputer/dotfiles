@@ -12,6 +12,7 @@ install:
 	[ -L ~/.config/nvim ] || [ -e ~/.config/nvim ] || ln -s $(CURDIR)/nvim ~/.config/nvim
 	[ -L ~/.config/tmux ] || [ -e ~/.config/tmux ] || ln -s $(CURDIR)/tmux ~/.config/tmux
 	[ -L ~/.config/bat ] || [ -e ~/.config/bat ] || ln -s $(CURDIR)/bat ~/.config/bat
+	[ -L ~/.config/ghostty ] || [ -e ~/.config/ghostty ] || ln -s $(CURDIR)/ghostty ~/.config/ghostty
 	[ -L ~/.config/starship.toml ] || [ -e ~/.config/starship.toml ] || ln -s $(CURDIR)/starship.toml ~/.config/starship.toml
 	[ -L ~/.claude/statusline-command.sh ] || [ -e ~/.claude/statusline-command.sh ] || ln -s $(CURDIR)/claude/statusline-command.sh ~/.claude/statusline-command.sh
 	[ -L ~/.claude/settings.json ] || [ -e ~/.claude/settings.json ] || ln -s $(CURDIR)/claude/settings.json ~/.claude/settings.json
@@ -29,6 +30,7 @@ clean:
 	rm -f ~/.config/nvim
 	rm -f ~/.config/tmux
 	rm -f ~/.config/bat
+	rm -f ~/.config/ghostty
 	rm -f ~/.claude/statusline-command.sh
 	rm -f ~/.claude/settings.json
 	rm -f ~/.claude/skills

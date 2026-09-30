@@ -8,13 +8,13 @@ Personal dotfiles managed with symlinks via Make.
 | ------ | ------- | ------------- |
 | **zsh** | `.zshrc` | Vi mode, history, fzf, autosuggestions |
 | **git** | `.gitconfig` | Aliases, histogram diff, rerere, auto-setup remote |
-| **neovim** | `nvim/` | LazyVim distribution with Catppuccin Mocha theme |
+| **neovim** | `nvim/` | LazyVim distribution with Rose Pine theme (follows light/dark) |
 | **tmux** | `tmux/` | C-Space prefix, vi keys, TPM plugins, Status bar |
 | **starship** | `starship.toml` | Prompt |
 | **bat** | `bat/` | Catppuccin Mocha theme |
 | **k9s** | `k9s/` | Catppuccin Mocha skin |
 | **claude code** | `claude/` | Catppuccin Mocha statusline, settings |
-| **ghostty** | (via Brewfile) | Terminal emulator |
+| **ghostty** | `ghostty/` | Rose Pine / Rose Pine Dawn, follows system light/dark |
 
 ## Prerequisites
 
@@ -54,6 +54,7 @@ make clean
 ├── starship.toml       # starship prompt config
 ├── tmux/               # tmux configuration + TPM plugins
 ├── k9s/                # k9s config + Catppuccin Mocha skin
+├── ghostty/            # ghostty terminal config
 ├── claude/             # claude code statusline + settings
 ├── Brewfile            # homebrew dependencies
 └── Makefile            # symlink installer

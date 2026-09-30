@@ -13,6 +13,7 @@ Each tool has its own directory or file at the repo root. The Makefile symlinks 
 | `nvim/` | `~/.config/nvim` |
 | `tmux/` | `~/.config/tmux` |
 | `bat/` | `~/.config/bat` |
+| `ghostty/` | `~/.config/ghostty` |
 | `starship.toml` | `~/.config/starship.toml` |
 | `claude/statusline-command.sh` | `~/.claude/statusline-command.sh` |
 | `claude/settings.json` | `~/.claude/settings.json` |
@@ -22,7 +23,7 @@ Each tool has its own directory or file at the repo root. The Makefile symlinks 
 
 ## Key conventions
 
-- **Theme**: Catppuccin Mocha everywhere (neovim, tmux, starship, bat, fzf, claude statusline, k9s)
+- **Theme**: migrating from Catppuccin Mocha to Rose Pine, following macOS light/dark where the tool supports it. Done: ghostty (`Rose Pine` / `Rose Pine Dawn`), neovim (`variant = "auto"`, driven by the terminal background). Still Catppuccin Mocha: tmux, starship, bat, fzf, claude statusline, k9s
 - **Shell**: zsh with vi mode, starship prompt, fzf, zsh-autosuggestions, zsh-syntax-highlighting
 - **Editor**: neovim via LazyVim
 - **Symlink guards**: Makefile uses `[ -L <path> ] || [ -e <path> ]` before linking — never overwrites existing files
