@@ -38,6 +38,10 @@ Each tool has its own directory or file at the repo root. The Makefile symlinks 
 - `make` / `make install` — create all symlinks and `~/.hushlogin`, build bat's theme cache
 - `make clean` — remove all managed symlinks
 
+## Ghostty config notes
+
+On macOS Ghostty reads `~/Library/Application Support/com.mitchellh.ghostty/config` *after* the symlinked `~/.config/ghostty/config`, so anything left in that path silently overrides this repo. The Makefile's symlink guards can't catch it — the symlink looks healthy either way. If a theme or keybind change here has no effect, check there first; `ghostty +show-config` prints the effective merged config.
+
 ## Claude config notes
 
 `~/.claude/` stores runtime data (sessions, cache, history) alongside config. Only specific files are symlinked — do not symlink the whole `~/.claude/` directory.

@@ -1,3 +1,4 @@
 theme = dark:Rose Pine,light:Rose Pine Dawn
-font-size = 13
+font-size = 15
 mouse-hide-while-typing = true
+keybind = shift+enter=text:\x1b\r
