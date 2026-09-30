@@ -43,17 +43,33 @@ alias k='kubectl'
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source <(fzf --zsh)
+# Rose Pine roles (rose-pine/fzf) on the terminal's ANSI colors, so the
+# terminal's light/dark theme decides
 export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
---color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
---color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
---color=selected-bg:#45475A \
---color=border:#313244,label:#CDD6F4"
+--color=16 \
+--color=fg:-1,bg:-1,hl:cyan \
+--color=fg+:-1,bg+:black,hl+:cyan \
+--color=border:bright-black,header:green,gutter:-1 \
+--color=spinner:yellow,info:blue \
+--color=pointer:magenta,marker:red,prompt:bright-black"
 
 # ===================
 #    THIRD PARTY
 # ===================
 if command -v kubectl &> /dev/null; then source <(kubectl completion zsh); fi
+
+# same k9s config dir on macOS and linux
+export K9S_CONFIG_DIR="$HOME/.config/k9s"
+# k9s skins can't follow the terminal's light/dark theme live, so pick one at launch
+k9s() {
+  local skin=rose-pine
+  if [[ -n $TMUX ]]; then
+    [[ $(tmux display -p '#{client_theme}') == light ]] && skin=rose-pine-dawn
+  elif [[ $OSTYPE == darwin* ]]; then
+    [[ $(defaults read -g AppleInterfaceStyle 2>/dev/null) == Dark ]] || skin=rose-pine-dawn
+  fi
+  K9S_SKIN=$skin command k9s "$@"
+}
 
 export GOPATH="$HOME/go"
 export GOROOT="$(go env GOROOT 2>/dev/null)"

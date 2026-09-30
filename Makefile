@@ -1,6 +1,7 @@
 all: install
 
-K9S_DIR = $(HOME)/Library/Application Support/k9s
+# file-level links: k9s writes clusters/, aliases.yaml etc. into this dir
+K9S_DIR = $(HOME)/.config/k9s
 
 install:
 	mkdir -p ~/.config
@@ -18,8 +19,11 @@ install:
 	[ -L ~/.claude/settings.json ] || [ -e ~/.claude/settings.json ] || ln -s $(CURDIR)/claude/settings.json ~/.claude/settings.json
 	[ -L ~/.claude/skills ] || [ -e ~/.claude/skills ] || ln -s $(CURDIR)/claude/skills ~/.claude/skills
 	[ -L "$(K9S_DIR)/config.yaml" ] || [ -e "$(K9S_DIR)/config.yaml" ] || ln -s $(CURDIR)/k9s/config.yaml "$(K9S_DIR)/config.yaml"
-	[ -L "$(K9S_DIR)/skins/catppuccin-mocha.yaml" ] || [ -e "$(K9S_DIR)/skins/catppuccin-mocha.yaml" ] || ln -s $(CURDIR)/k9s/skins/catppuccin-mocha.yaml "$(K9S_DIR)/skins/catppuccin-mocha.yaml"
+	[ -L "$(K9S_DIR)/skins/rose-pine.yaml" ] || [ -e "$(K9S_DIR)/skins/rose-pine.yaml" ] || ln -s $(CURDIR)/k9s/skins/rose-pine.yaml "$(K9S_DIR)/skins/rose-pine.yaml"
+	[ -L "$(K9S_DIR)/skins/rose-pine-dawn.yaml" ] || [ -e "$(K9S_DIR)/skins/rose-pine-dawn.yaml" ] || ln -s $(CURDIR)/k9s/skins/rose-pine-dawn.yaml "$(K9S_DIR)/skins/rose-pine-dawn.yaml"
 
+# bat only sees the themes in bat/themes/ after a cache build
+	if command -v bat >/dev/null 2>&1; then bat cache --build >/dev/null; fi
 	touch ~/.hushlogin
 
 clean:
@@ -35,6 +39,7 @@ clean:
 	rm -f ~/.claude/settings.json
 	rm -f ~/.claude/skills
 	rm -f "$(K9S_DIR)/config.yaml"
-	rm -f "$(K9S_DIR)/skins/catppuccin-mocha.yaml"
+	rm -f "$(K9S_DIR)/skins/rose-pine.yaml"
+	rm -f "$(K9S_DIR)/skins/rose-pine-dawn.yaml"
 
 .PHONY: all clean install

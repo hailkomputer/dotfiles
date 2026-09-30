@@ -18,19 +18,25 @@ Each tool has its own directory or file at the repo root. The Makefile symlinks 
 | `claude/statusline-command.sh` | `~/.claude/statusline-command.sh` |
 | `claude/settings.json` | `~/.claude/settings.json` |
 | `claude/skills/` | `~/.claude/skills` |
-| `k9s/config.yaml` | `~/Library/Application Support/k9s/config.yaml` |
-| `k9s/skins/catppuccin-mocha.yaml` | `~/Library/Application Support/k9s/skins/catppuccin-mocha.yaml` |
+| `k9s/config.yaml` | `~/.config/k9s/config.yaml` (`K9S_CONFIG_DIR`, set in `.zshrc`) |
+| `k9s/skins/rose-pine*.yaml` | `~/.config/k9s/skins/` |
 
 ## Key conventions
 
-- **Theme**: migrating from Catppuccin Mocha to Rose Pine, following macOS light/dark where the tool supports it. Done: ghostty (`Rose Pine` / `Rose Pine Dawn`), neovim (`variant = "auto"`, driven by the terminal background), bat (`--theme=auto`, run `bat cache --build` after changing `bat/themes/`), claude statusline (ANSI colors, so the terminal palette decides), tmux (`client-dark-theme` / `client-light-theme` hooks set `@rose_pine_variant` and re-run the plugin). Still Catppuccin Mocha: starship, fzf, k9s
+- **Theme**: Rose Pine (dark) / Rose Pine Dawn (light) everywhere, following the terminal's light/dark theme. Ghostty switches with the OS appearance and the rest follow the terminal:
+  - neovim: `variant = "auto"` (nvim updates `background` from the terminal)
+  - bat: `--theme=auto`; `make install` runs `bat cache --build`, rerun it after changing `bat/themes/`
+  - tmux: `client-dark-theme` / `client-light-theme` hooks set `@rose_pine_variant` and re-run the plugin
+  - starship, fzf, claude statusline: ANSI colors only, so the terminal palette decides — no hex values
+  - k9s: converts every color to RGB, so the `k9s()` function in `.zshrc` picks the skin via `K9S_SKIN` at launch
+  - claude code: `"theme": "auto"`
 - **Shell**: zsh with vi mode, starship prompt, fzf, zsh-autosuggestions, zsh-syntax-highlighting
 - **Editor**: neovim via LazyVim
 - **Symlink guards**: Makefile uses `[ -L <path> ] || [ -e <path> ]` before linking — never overwrites existing files
 
 ## Makefile targets
 
-- `make` / `make install` — create all symlinks and `~/.hushlogin`
+- `make` / `make install` — create all symlinks and `~/.hushlogin`, build bat's theme cache
 - `make clean` — remove all managed symlinks
 
 ## Claude config notes
