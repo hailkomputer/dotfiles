@@ -17,7 +17,6 @@ Each tool has its own directory or file at the repo root. The Makefile symlinks 
 | `starship.toml` | `~/.config/starship.toml` |
 | `claude/statusline-command.sh` | `~/.claude/statusline-command.sh` |
 | `claude/settings.json` | `~/.claude/settings.json` |
-| `claude/skills/` | `~/.claude/skills` |
 | `k9s/config.yaml` | `~/.config/k9s/config.yaml` (`K9S_CONFIG_DIR`, set in `.zshrc`) |
 | `k9s/skins/rose-pine*.yaml` | `~/.config/k9s/skins/` |
 

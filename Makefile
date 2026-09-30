@@ -17,7 +17,6 @@ install:
 	[ -L ~/.config/starship.toml ] || [ -e ~/.config/starship.toml ] || ln -s $(CURDIR)/starship.toml ~/.config/starship.toml
 	[ -L ~/.claude/statusline-command.sh ] || [ -e ~/.claude/statusline-command.sh ] || ln -s $(CURDIR)/claude/statusline-command.sh ~/.claude/statusline-command.sh
 	[ -L ~/.claude/settings.json ] || [ -e ~/.claude/settings.json ] || ln -s $(CURDIR)/claude/settings.json ~/.claude/settings.json
-	[ -L ~/.claude/skills ] || [ -e ~/.claude/skills ] || ln -s $(CURDIR)/claude/skills ~/.claude/skills
 	[ -L "$(K9S_DIR)/config.yaml" ] || [ -e "$(K9S_DIR)/config.yaml" ] || ln -s $(CURDIR)/k9s/config.yaml "$(K9S_DIR)/config.yaml"
 	[ -L "$(K9S_DIR)/skins/rose-pine.yaml" ] || [ -e "$(K9S_DIR)/skins/rose-pine.yaml" ] || ln -s $(CURDIR)/k9s/skins/rose-pine.yaml "$(K9S_DIR)/skins/rose-pine.yaml"
 	[ -L "$(K9S_DIR)/skins/rose-pine-dawn.yaml" ] || [ -e "$(K9S_DIR)/skins/rose-pine-dawn.yaml" ] || ln -s $(CURDIR)/k9s/skins/rose-pine-dawn.yaml "$(K9S_DIR)/skins/rose-pine-dawn.yaml"
@@ -37,7 +36,6 @@ clean:
 	rm -f ~/.config/ghostty
 	rm -f ~/.claude/statusline-command.sh
 	rm -f ~/.claude/settings.json
-	rm -f ~/.claude/skills
 	rm -f "$(K9S_DIR)/config.yaml"
 	rm -f "$(K9S_DIR)/skins/rose-pine.yaml"
 	rm -f "$(K9S_DIR)/skins/rose-pine-dawn.yaml"
