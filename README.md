@@ -24,7 +24,7 @@ Personal dotfiles managed with symlinks via Make.
 
 ```sh
 # clone the repo
-git clone git@github.com:yigitdemirbas/dotfiles.git
+git clone git@github.com:hailkomputer/dotfiles.git
 cd dotfiles
 
 # install dependencies
