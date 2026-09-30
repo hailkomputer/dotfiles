@@ -9,11 +9,11 @@ Personal dotfiles managed with symlinks via Make.
 | **zsh** | `.zshrc` | Vi mode, history, fzf, autosuggestions |
 | **git** | `.gitconfig` | Aliases, histogram diff, rerere, auto-setup remote |
 | **neovim** | `nvim/` | LazyVim distribution with Rose Pine theme (follows light/dark) |
-| **tmux** | `tmux/` | C-Space prefix, vi keys, TPM plugins, Status bar |
+| **tmux** | `tmux/` | C-Space prefix, vi keys, TPM plugins, Rose Pine status bar (follows light/dark) |
 | **starship** | `starship.toml` | Prompt |
-| **bat** | `bat/` | Catppuccin Mocha theme |
+| **bat** | `bat/` | Rose Pine / Rose Pine Dawn, follows terminal light/dark |
 | **k9s** | `k9s/` | Catppuccin Mocha skin |
-| **claude code** | `claude/` | Catppuccin Mocha statusline, settings |
+| **claude code** | `claude/` | Rose Pine statusline, auto light/dark theme, settings |
 | **ghostty** | `ghostty/` | Rose Pine / Rose Pine Dawn, follows system light/dark |
 
 ## Prerequisites

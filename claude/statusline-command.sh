@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# Claude Code status line — styled after Starship Catppuccin Mocha
+# Claude Code status line — Rose Pine
 
 input=$(cat)
 
-# Catppuccin Mocha palette (ANSI 256-color approximations via truecolor)
-TEAL='\033[38;2;148;226;213m'
-LAVENDER='\033[38;2;180;190;254m'
-MAUVE='\033[38;2;203;166;247m'
-MAROON='\033[38;2;235;160;172m'
-PEACH='\033[38;2;250;179;135m'
-SUBTEXT1='\033[38;2;186;194;222m'
-GREEN='\033[38;2;166;227;161m'
-YELLOW='\033[38;2;249;226;175m'
+# Rose Pine via the terminal's ANSI palette, so colors follow the terminal's
+# light/dark theme (ghostty maps these to Rose Pine / Rose Pine Dawn)
+LOVE='\033[31m'
+PINE='\033[32m'
+GOLD='\033[33m'
+FOAM='\033[34m'
+IRIS='\033[35m'
+ROSE='\033[36m'
+MUTED='\033[90m'
 BOLD='\033[1m'
 RESET='\033[0m'
 
@@ -47,35 +47,35 @@ remaining=$(echo "$input" | jq -r '.context_window.remaining_percentage // empty
 # Build the line
 line=""
 
-# user in teal bold
-line="${line}${BOLD}${TEAL}${user}${RESET}"
+# user in foam bold
+line="${line}${BOLD}${FOAM}${user}${RESET}"
 
-# directory in lavender bold
-line="${line} ${BOLD}${LAVENDER}${truncated_dir}${RESET}"
+# directory in iris bold
+line="${line} ${BOLD}${IRIS}${truncated_dir}${RESET}"
 
-# git branch in mauve bold, status in maroon
+# git branch in rose bold, status in love
 if [ -n "$branch" ]; then
-  line="${line} ${BOLD}${MAUVE}${branch}${RESET}"
+  line="${line} ${BOLD}${ROSE}${branch}${RESET}"
   if [ -n "$git_status_str" ]; then
-    line="${line}${BOLD}${MAROON}${git_status_str}${RESET}"
+    line="${line}${BOLD}${LOVE}${git_status_str}${RESET}"
   fi
 fi
 
-# model in subtext1
+# model in muted
 if [ -n "$model" ]; then
-  line="${line} ${SUBTEXT1}${model}${RESET}"
+  line="${line} ${MUTED}${model}${RESET}"
 fi
 
 # context remaining
 if [ -n "$remaining" ]; then
-  # color: green if >50%, yellow if 20-50%, peach/red if <20%
+  # color: pine if >50%, gold if 20-50%, love if <20%
   pct=$(printf '%.0f' "$remaining")
   if [ "$pct" -gt 50 ]; then
-    ctx_color="$GREEN"
+    ctx_color="$PINE"
   elif [ "$pct" -gt 20 ]; then
-    ctx_color="$YELLOW"
+    ctx_color="$GOLD"
   else
-    ctx_color="$PEACH"
+    ctx_color="$LOVE"
   fi
   line="${line} ${ctx_color}ctx:${pct}%${RESET}"
 fi

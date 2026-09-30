@@ -12,5 +12,6 @@
   "skipWorkflowUsageWarning": true,
   "attribution": {
     "commit": ""
-  }
+  },
+  "theme": "auto"
 }

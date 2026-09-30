@@ -23,7 +23,7 @@ Each tool has its own directory or file at the repo root. The Makefile symlinks 
 
 ## Key conventions
 
-- **Theme**: migrating from Catppuccin Mocha to Rose Pine, following macOS light/dark where the tool supports it. Done: ghostty (`Rose Pine` / `Rose Pine Dawn`), neovim (`variant = "auto"`, driven by the terminal background). Still Catppuccin Mocha: tmux, starship, bat, fzf, claude statusline, k9s
+- **Theme**: migrating from Catppuccin Mocha to Rose Pine, following macOS light/dark where the tool supports it. Done: ghostty (`Rose Pine` / `Rose Pine Dawn`), neovim (`variant = "auto"`, driven by the terminal background), bat (`--theme=auto`, run `bat cache --build` after changing `bat/themes/`), claude statusline (ANSI colors, so the terminal palette decides), tmux (`client-dark-theme` / `client-light-theme` hooks set `@rose_pine_variant` and re-run the plugin). Still Catppuccin Mocha: starship, fzf, k9s
 - **Shell**: zsh with vi mode, starship prompt, fzf, zsh-autosuggestions, zsh-syntax-highlighting
 - **Editor**: neovim via LazyVim
 - **Symlink guards**: Makefile uses `[ -L <path> ] || [ -e <path> ]` before linking — never overwrites existing files
@@ -37,7 +37,7 @@ Each tool has its own directory or file at the repo root. The Makefile symlinks 
 
 `~/.claude/` stores runtime data (sessions, cache, history) alongside config. Only specific files are symlinked — do not symlink the whole `~/.claude/` directory.
 
-`claude/settings.json` enables the gopls LSP plugin and the Catppuccin Mocha statusline. The statusline command uses `~` so it resolves correctly on any machine.
+`claude/settings.json` enables the gopls LSP plugin, the Rose Pine statusline, and `"theme": "auto"` (match terminal light/dark). The statusline command uses `~` so it resolves correctly on any machine.
 
 ## Stack
 
