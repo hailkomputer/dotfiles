@@ -60,7 +60,7 @@ k9s:
       modifyColor: *iris
       addColor: *pine
       errorColor: *love
-      highlightcolor: *gold
+      highlightColor: *gold
       killColor: *muted
       completedColor: *muted
     # Border title styles.
