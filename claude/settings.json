@@ -18,5 +18,41 @@
   },
   "tui": "fullscreen",
   "skipWorkflowUsageWarning": true,
-  "theme": "auto"
+  "theme": "auto",
+  "permissions": {
+    "ask": [
+      "Bash(git push *)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "allowUnsandboxedCommands": false,
+    "excludedCommands": [
+      "git push *",
+      "git pull *",
+      "git fetch *"
+    ],
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "*.github.com",
+        "*.githubusercontent.com",
+        "proxy.golang.org",
+        "sum.golang.org"
+      ]
+    },
+    "filesystem": {
+      "denyRead": [
+        "~/.ssh",
+        "~/.kube",
+        "~/.aws",
+        "~/.azure",
+        "~/.config/gcloud",
+        "~/.config/gh",
+        "~/.docker/config.json",
+        "~/.netrc",
+        "~/.gnupg"
+      ]
+    }
+  }
 }
