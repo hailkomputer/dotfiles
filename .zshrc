@@ -72,9 +72,7 @@ k9s() {
 }
 
 export GOPATH="$HOME/go"
-export GOROOT="$(go env GOROOT 2>/dev/null)"
 export PATH="$PATH:$GOPATH/bin"
-[ -n "$GOROOT" ] && export PATH="$PATH:$GOROOT/bin"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 eval "$(starship init zsh)"
