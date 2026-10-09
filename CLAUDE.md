@@ -36,7 +36,7 @@ Each tool has its own directory or file at the repo root. The Makefile symlinks 
 ## Makefile targets
 
 - `make` / `make install` — create all symlinks and `~/.hushlogin`, build bat's theme cache
-- `make clean` — remove all managed symlinks
+- `make clean` — remove `~/.hushlogin` and every managed symlink that still points into this repo; real files and foreign links are left alone
 
 ## Ghostty config notes
 
