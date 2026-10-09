@@ -46,7 +46,11 @@ On macOS Ghostty reads `~/Library/Application Support/com.mitchellh.ghostty/conf
 
 `~/.claude/` stores runtime data (sessions, cache, history) alongside config. Only specific files are symlinked — do not symlink the whole `~/.claude/` directory.
 
-`claude/settings.json` enables the gopls LSP plugin, the Rose Pine statusline, and `"theme": "auto"` (match terminal light/dark). The statusline command uses `~` so it resolves correctly on any machine.
+`claude/settings.json` enables the gopls LSP plugin, the Rose Pine statusline, `"theme": "auto"` (match terminal light/dark), and the Bash sandbox. The statusline command uses `~` so it resolves correctly on any machine.
+
+The sandbox runs Bash in macOS Seatbelt with `allowUnsandboxedCommands: false`, so there is no escape hatch. Network is allowlisted to GitHub and the Go module proxy (other hosts prompt), and `~/.ssh`, `~/.kube`, cloud CLI credentials and `~/.docker/config.json` are unreadable. Because `.gitconfig` sends GitHub over SSH, `git push`/`pull`/`fetch` are `excludedCommands`: they run outside the sandbox through the permission flow, and `git push` is also a `permissions.ask` rule, so it always prompts. `kubectl` can't reach clusters from Claude's shell; run it with `!`.
+
+Because `~/.claude/settings.json` symlinks into this repo, the sandbox write-protects `claude/settings.json` and `.git/config` from shell commands. A `git switch` that would rewrite `claude/settings.json` fails with "Operation not permitted", and git commands that write `.git/config` (deleting a branch, setting an upstream) fail to lock it. Edit settings with the Edit tool and run such git commands yourself with `!`.
 
 ## Stack
 
