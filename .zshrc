@@ -74,6 +74,10 @@ k9s() {
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+# Lua tools installed with `luarocks --local` (busted)
+export PATH="$HOME/.luarocks/bin:$PATH"
+# LÖVE ships as a macOS app; put its binary on PATH as `love`
+[[ -d /Applications/love.app ]] && export PATH="/Applications/love.app/Contents/MacOS:$PATH"
 
 eval "$(starship init zsh)"
 
